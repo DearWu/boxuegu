@@ -1,4 +1,4 @@
-define(['jquery', 'jqueryCookie', 'nprogress'], function ($, undefined, nprogress) {
+define(['jquery', 'jqueryCookie', 'nprogress','loading'], function ($, undefined, nprogress,undefined) {
     //登录校验
     (function () {
         //如果油PHPSESSID这个cookie，说明有登录过，跳转至首页
