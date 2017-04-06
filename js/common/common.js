@@ -1,8 +1,7 @@
 // jqueryCookie是define定义的模块，但是像这种jquery插件，
  // 他们提供给的功能都放置到了jquery原型或者自己身上，并没有返回东西，所有引入他们得到的返回值是undefine，
  // 要使用他们提供的功能，必须要借助与jquery。
-define(['jqueryCookie'], function ($, undefined) {
-    console.log($.coe);
+define(['jquery','jqueryCookie'], function ($, undefined) {
     /**
      * 判断用户有没有登录过
      * 、没有的就跳转到登录页
