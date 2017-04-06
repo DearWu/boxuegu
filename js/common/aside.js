@@ -65,8 +65,8 @@ define(['jquery', 'jqueryCookie', 'template'], function ($, undefined, template)
         var pathHref = {
             '/html/teacher/teacher_add.html': '/html/teacher/teacher_list.html'
         };
-        var pathname=location.pathname;
-        var aHref=pathHref[pathname]?pathHref[pathname]:pathname;
-         $('.navs a').removeClass('active').filter('[href="' + aHref + '"]').addClass('active');
+        var pathname = location.pathname;
+        var aHref = pathHref[pathname] ? pathHref[pathname] : pathname;
+        $('.navs a').removeClass('active').filter('[href="' + aHref + '"]').addClass('active');
     })();
 })
