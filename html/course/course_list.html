@@ -49,7 +49,7 @@
                         </form>
                     </div>
                     <!--课程列表的坑-->
-                    
+
                 </div>
                 <!-- 分页 -->
                 <ul class="pagination pull-right">
@@ -67,13 +67,13 @@
     <script id='courses-list-tpl' type='text/html'>
         {{each result as courses i}}
         <div class="course">
-                        <div class="pic">
-                            <img src={{courses.cs_cover?courses.cs_cover:'/img/course.png'}} alt="">
-                        </div>
-                        <div class="info">
-                            <a href="javascript:;">{{courses.cs_name}}</a>
-                            <ul class="list-unstyled">
-                                <li>
+            <div class="pic">
+                <img src={{courses.cs_cover?courses.cs_cover: '/img/course.png'}} alt="">
+            </div>
+            <div class="info">
+                <a href="/html/course/course_add_step1.html?cs_id={{ courses.cs_id }}">{{courses.cs_name}}</a>
+                <ul class="list-unstyled">
+                    <li>
                         <span>讲师：{{ courses.tc_name }}</span>
                         <span>类别：{{ courses.cg_name }}</span>
                     </li>
@@ -85,10 +85,10 @@
                         <span>浏览：{{ '' | random:'0, 200000' }}</span>
                         <span></span>
                     </li>
-                            </ul>
-                        </div>
-                    </div>
-                    {{/each}}
+                </ul>
+            </div>
+        </div>
+        {{/each}}
     </script>
     <?php include($_SERVER['DOCUMENT_ROOT'].'/html/common/script.html') ?>
 </body>

@@ -6,6 +6,7 @@
     <title>学IT - 后台管理系统</title>
     <!--通过php的include方法，当浏览器访问这个页面时，php就会把提取的出去的公共html片段引入进来，在返回给浏览器-->
     <?php include($_SERVER['DOCUMENT_ROOT'].'/html/common/style.html') ?>
+    <link rel="stylesheet" href="/lib/Jcrop/css/Jcrop.css" />
 </head>
 
 <body>
@@ -53,7 +54,7 @@
                     <input type="file" id="upfile" style="display:none">
                 </div>
                 <div class="col-xs-2">
-                    <a href="javascript:;" class="btn btn-warning btn-sm" disabled>裁切图片</a>
+                    <a href="javascript:;" class="btn btn-warning btn-sm" id="clip-btn">裁切图片</a>
                 </div>
             </div>
         </div>

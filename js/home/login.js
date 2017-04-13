@@ -1,4 +1,8 @@
 define(['jquery', 'jqueryCookie', 'nprogress','loading'], function ($, undefined, nprogress,undefined) {
+    //设置历史最后一个人登录的头像
+    var tcAvatar=JSON.parse($.cookie('userInfo')||'{}').tc_avatar;
+    $('.avatar img').attr('src',tcAvatar?tcAvatar:'/img/default.png');
+    
     //登录校验
     (function () {
         //如果油PHPSESSID这个cookie，说明有登录过，跳转至首页

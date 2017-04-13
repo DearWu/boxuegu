@@ -50,11 +50,11 @@ define(['jquery', 'jqueryCookie', 'template'], function ($, undefined, template)
     //根据页面定义左侧导航焦点
     (function () {
         /**
- 		 * 根据一些页面规律进行焦点
- 		 * 1、获取当前页面的路径
- 		 * 2、移除所有a标签的active类名
- 		 * 3、把路径当做属性选择器选择页面对应的a标签，给对应的a标签单独添加
- 		 * */
+         * 根据一些页面规律进行焦点
+         * 1、获取当前页面的路径
+         * 2、移除所有a标签的active类名
+         * 3、把路径当做属性选择器选择页面对应的a标签，给对应的a标签单独添加
+         * */
         // var pathname = location.pathname;
         // $('.navs a').removeClass('active').filter('[href="' + pathname + '"]').addClass('active');
         /**
@@ -70,10 +70,16 @@ define(['jquery', 'jqueryCookie', 'template'], function ($, undefined, template)
          * */
 
         var pathHref = {
-            '/html/teacher/teacher_add.html': '/html/teacher/teacher_list.html'
+            '/html/teacher/teacher_add.html': '/html/teacher/teacher_list.html',
+            '/html/course/course_add_step1.html': '/html/course/course_add.html',
+            '/html/course/course_add_step2.html': '/html/course/course_add.html',
+            '/html/course/course_add_step3.html': '/html/course/course_add.html',
         };
         var pathname = location.pathname;
         var aHref = pathHref[pathname] ? pathHref[pathname] : pathname;
-        $('.navs a').removeClass('active').filter('[href="' + aHref + '"]').addClass('active');
+        $('.navs a').removeClass('active').filter('[href="' + aHref + '"]')
+
+            // 让被选中的a标签所有的父都为展示状态
+            .addClass('active').parentsUntil('.navs').show();
     })();
 })

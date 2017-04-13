@@ -1,5 +1,5 @@
-define(['jquery', 'common', 'header', 'aside', 'nprogress', 'loading', 'template', 'jqueryForm', 'datepicker', 'datepickerCN', 'ckeditor', 'jqueryRegion', 'uploadify'],
-    function ($, undefined, undefined, undefined, nprogress, loading, template, undefined, undefined, undefined, ckeditor, undefined, undefined) {
+define(['jquery', 'jqueryCookie', 'common', 'header', 'aside', 'nprogress', 'loading', 'template', 'jqueryForm', 'datepicker', 'datepickerCN', 'ckeditor', 'jqueryRegion', 'uploadify'],
+    function ($, undefined, undefined, undefined, undefined, nprogress, loading, template, undefined, undefined, undefined, ckeditor, undefined, undefined) {
 
         // 用来存储将来实例化好的富文本编辑实例。
         var edit = null;
@@ -16,7 +16,7 @@ define(['jquery', 'common', 'header', 'aside', 'nprogress', 'loading', 'template
                     format: 'yyyy-mm-dd'
                 });
 
-                
+
                 // 初始化富文本编辑器
                 edit = ckeditor.replace('ckeditor', {
                     toolbarGroups: [{
@@ -40,7 +40,31 @@ define(['jquery', 'common', 'header', 'aside', 'nprogress', 'loading', 'template
                     buttonText: '',
                     height: $('.preview').height(),
                     onUploadSuccess: function (file, data, response) {
-                        data && $('.preview img').attr('src', JSON.parse(data).result.path);
+                        try {
+                            data = JSON.parse(data);
+                        } catch (e) {
+                            data = {};
+                        }
+
+                        // 图片上传成功后，更新页面头像，同时更新本地cookie记录
+                        if (data.code == 200) {
+                            $('.preview img').attr('src', data.result.path);
+
+                            // 左侧导航那个头像
+                            $('.img-circle img').attr('src', data.result.path);
+
+                            /*
+                             * 1、获取userInfo这个cookie字符串值
+                             * 2、解析为对象
+                             * 3、设置对象的tc_avatar值为新的地址
+                             * 4、把对象转换为字符串保存到cookie中
+                             * */
+                            var userInfoObj = JSON.parse($.cookie('userInfo') || '{}');
+                            userInfoObj.tc_avatar = data.result.path;
+                            $.cookie('userInfo', JSON.stringify(userInfoObj), {
+                                path: '/'
+                            });
+                        }
                     }
                 });
             }

@@ -1,16 +1,21 @@
 define(['jquery', 'common', 'header', 'aside', 'nprogress', 'loading', 'template', 'jqueryForm'],
     function ($, common, undefined, undefined, nprogress, loading, template, undefined) {
         /**
+         * // 0、设置课程详细信息左侧导航
          * 1、获取url查询字符串中的cs_id
          * 2、利用cs_id请求接口获取当前课程的基本信息，渲染页面进行数据回显
          * 3、初始化表单提交插件
          */
+        function initAddAside() {
+            $('.forwards a').removeClass('active').first().addClass('active');
+        };
         var csId = common.parseSearch('cs_id');
         $.get('/v6/course/basic', {
             cs_id: csId
         }, function (data) {
             if (data.code == 200) {
                 $('.steps').html(template('add-step1-tpl', data.result));
+                initAddAside();
             }
         });
         //监听顶级分类选取事件，选取后，动态设置子级分类下拉列表

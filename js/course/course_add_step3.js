@@ -10,7 +10,10 @@ define(['bootstrap', 'jquery', 'common', 'header', 'aside', 'nprogress', 'loadin
          * 3.1、区分添加与编辑获取不同的数据，回显模态框页面数据
          * 3.2、初始化模态框的表单提交
          * */
-
+        // 0、设置课程详细信息左侧导航
+        function initAddAside() {
+            $('.forwards a').removeClass('active').first().addClass('active');
+        };
         // 1、获取url查询字符串中的cs_id
         var csId = common.parseSearch('cs_id');
         $.get('/v6/course/lesson', {
@@ -18,6 +21,7 @@ define(['bootstrap', 'jquery', 'common', 'header', 'aside', 'nprogress', 'loadin
         }, function (data) {
             if (data.code == 200) {
                 $('.steps').html(template('add-step3-tpl', data.result));
+                initAddAside();
             }
         });
         /// 3.1、区分添加与编辑获取不同的数据，回显模态框页面数据
@@ -37,11 +41,13 @@ define(['bootstrap', 'jquery', 'common', 'header', 'aside', 'nprogress', 'loadin
         // 3.2、初始化模态框的表单提交
         // 点击模态框右下角的提交按钮，手动触发表单的ajax发送
         $(document).on('click', '#add-edit-submit-btn', function () {
-
+            //获取ct_is_free选择框的状态
+            var isChecked = $('.checkbox input').prop('checked');
             // 以ajax的方式提交表单数据
             $('#add-edit-form').ajaxSubmit({
                 // 模态框模版中没有课程ID表单，所以在这里额外进行补充
                 data: {
+                    ct_is_free: isChecked ? 1 : 0,
                     ct_cs_id: csId
                 },
                 success: function (data) {
